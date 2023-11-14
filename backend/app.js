@@ -6,20 +6,23 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
-const appointmentRoutes = require("./routes/appointmentRoutes"); // Renamed from taskRoutes
+const appointmentRoutes = require("./routes/appointmentRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 
 app.use(express.json());
 app.use(cors());
 
 const mongoUrl = process.env.MONGODB_URL;
-mongoose.connect(mongoUrl, (err) => {
-  if (err) throw err;
-  console.log("Mongodb connected...");
-});
+mongoose.connect(mongoUrl)
+  .then(() => console.log("Mongodb connected..."))
+  .catch(err => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
+
 
 app.use("/api/auth", authRoutes);
-app.use("/api/appointments", appointmentRoutes); // Updated endpoint
+app.use("/api/appointments", appointmentRoutes);
 app.use("/api/profile", profileRoutes);
 
 if (process.env.NODE_ENV === "production") {
@@ -29,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5007;
 app.listen(port, () => {
   console.log(`Backend is running on port ${port}`);
 });
