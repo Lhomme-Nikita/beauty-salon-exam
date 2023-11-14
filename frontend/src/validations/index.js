@@ -25,7 +25,7 @@ export const validate = (group, name, value) => {
           if (!value) return "This field is required";
           return null;
         default:
-          return null; // Added default case
+          return null;
       }
     
     case "appointment":
@@ -56,11 +56,11 @@ export const validate = (group, name, value) => {
           if (!isValidEmail(value)) return "Invalid email format";
           return null;
         default:
-          return null; // Added default case
+          return null; 
       }
 
     default:
-      return null; // Added default case for outer switch
+      return null;
   }
 };
 

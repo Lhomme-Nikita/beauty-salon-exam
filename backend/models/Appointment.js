@@ -15,11 +15,11 @@ const appointmentSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: String, // Consider using Date type if suitable
+    type: String,
     required: true,
   },
   time: {
-    type: String, // Consider using Date type if suitable
+    type: String,
     required: true,
   },
   email: {
